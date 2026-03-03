@@ -59,12 +59,16 @@ body {
   top: 0;
   z-index: 1000;
   background: linear-gradient(135deg, #7B3FBE 0%, #5C2D91 100%);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
   padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 3rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .header-name {
   font-size: clamp(1rem, 2.5vw, 1.4rem);
@@ -132,7 +136,7 @@ body {
 /* ===== SECTION BASE ===== */
 section { width: 100%; }
 .section-inner {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 clamp(1rem, 4vw, 3rem);
 }
@@ -520,48 +524,102 @@ section { width: 100%; }
   display: block;
 }
 
-/* ===== CONTACT SECTION ===== */
-.contact {
-  background: linear-gradient(135deg, #64B5F6 0%, #1565C0 100%);
-  padding: clamp(4rem, 8vw, 6rem) 0;
-  text-align: center;
+/* ===== SKILLS SECTION ===== */
+.skills {
+  background: #0F2D5E;
+  padding: clamp(3rem, 6vw, 5rem) 0;
 }
-.contact-heading {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.04em;
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-.contact-sub {
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  font-weight: 300;
-  color: rgba(255,255,255,0.85);
-  max-width: 480px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-}
-.btn-contact {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: clamp(0.85rem, 2vw, 1.1rem) clamp(2rem, 4vw, 3rem);
-  background: #fff;
-  color: #1565C0;
-  border-radius: 40px;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
+.skills-label {
+  font-size: clamp(0.65rem, 1.2vw, 0.75rem);
   font-weight: 700;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
 }
-.btn-contact:hover, .btn-contact:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+.skills-heading {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.timeline-header {
+  margin-bottom: 2rem;
+}
+.timeline-years {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.timeline-year {
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.05em;
+}
+.timeline-track {
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 1px;
+  position: relative;
+}
+.timeline-ticks {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.timeline-tick {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,0.3);
+}
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.skill-row {
+  display: grid;
+  grid-template-columns: clamp(140px, 26%, 240px) 1fr;
+  align-items: center;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.skill-row.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.skill-name {
+  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  text-align: right;
+  line-height: 1.3;
+}
+.skill-track {
+  height: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  position: relative;
+}
+.skill-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #3DBFB8 0%, #64B5F6 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skill-fill.animated {
+  transform: scaleX(1);
 }
 
 /* ===== FOOTER ===== */
@@ -586,6 +644,7 @@ section { width: 100%; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .header-title { display: none; }
   .clients-grid { gap: 1rem; }
+  .skill-row { grid-template-columns: clamp(100px, 32%, 150px) 1fr; gap: 0.75rem; }
 }
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: 1fr; }
@@ -596,6 +655,9 @@ section { width: 100%; }
     height: 90px;
   }
   .client-name { font-size: 0.55rem; }
+  .skill-row { grid-template-columns: 1fr; gap: 0.25rem; }
+  .skill-name { text-align: left; }
+  .timeline-years { display: none; }
 }
 </style>
 </head>
@@ -604,13 +666,15 @@ section { width: 100%; }
 
 <!-- HEADER -->
 <header class="site-header" role="banner">
-  <span class="header-name">Kevin C. Braun</span>
-  <span class="header-title" aria-label="Product & Design Leader, Educator, Author">Product &amp; Design Leader, Educator, Author</span>
-  <nav class="header-actions" aria-label="Header navigation">
-    <a href="#" class="btn-resume" aria-label="Download Resume">Resume</a>
-    <a href="https://linkedin.com/in/kevinbraun" class="icon-btn" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer">in</a>
-    <a href="mailto:kevin@kevinbraun.com" class="icon-btn" aria-label="Send email to Kevin">@</a>
-  </nav>
+  <div class="header-inner">
+    <span class="header-name">Kevin C. Braun</span>
+    <span class="header-title" aria-label="Product & Design Leader, Educator, Author">Product &amp; Design Leader, Educator, Author</span>
+    <nav class="header-actions" aria-label="Header navigation">
+      <a href="#" class="btn-resume" aria-label="Download Resume">Resume</a>
+      <a href="https://linkedin.com/in/kevinbraun" class="icon-btn" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer">in</a>
+      <a href="mailto:kevin@kevinbraun.com" class="icon-btn" aria-label="Send email to Kevin">@</a>
+    </nav>
+  </div>
 </header>
 
 <!-- MAIN -->
@@ -1647,18 +1711,135 @@ section { width: 100%; }
   </div><!-- /section-inner -->
 </section>
 
-<!-- CONTACT SECTION -->
-<section class="contact" aria-labelledby="contact-heading">
+<!-- SKILLS SECTION -->
+<section class="skills" aria-labelledby="skills-heading">
   <div class="section-inner">
-    <h2 class="contact-heading" id="contact-heading">Let's Work Together</h2>
-    <p class="contact-sub">Have a product challenge, research initiative, or design project? I'd love to hear about it and explore how we can create meaningful impact together.</p>
-    <a href="mailto:kevin@kevinbraun.com" class="btn-contact" aria-label="Contact Kevin Braun via email">
-      Get In Touch
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <path d="M3.75 9H14.25M14.25 9L9.75 4.5M14.25 9L9.75 13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
+    <p class="skills-label">Experience</p>
+    <h2 class="skills-heading" id="skills-heading">Skills &amp; Expertise</h2>
+
+    <div class="timeline-header" aria-hidden="true">
+      <div class="timeline-years">
+        <span class="timeline-year">2000</span>
+        <span class="timeline-year">2005</span>
+        <span class="timeline-year">2010</span>
+        <span class="timeline-year">2015</span>
+        <span class="timeline-year">2020</span>
+        <span class="timeline-year">Today</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-ticks">
+          <div class="timeline-tick"></div>
+          <div class="timeline-tick"></div>
+          <div class="timeline-tick"></div>
+          <div class="timeline-tick"></div>
+          <div class="timeline-tick"></div>
+          <div class="timeline-tick"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-list" role="list" aria-label="Skills and experience timeline">
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Executive Leadership</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Executive Leadership, active since 2010">
+          <div class="skill-fill" style="left:38.5%;width:61.5%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Team Leadership</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" aria-label="Team Leadership, active since 2005">
+          <div class="skill-fill" style="left:19.2%;width:80.8%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">AI Experience Design and Development</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" aria-label="AI Experience Design and Development, active since 2018">
+          <div class="skill-fill" style="left:69.2%;width:30.8%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Quantitative Analysis</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Quantitative Analysis, active since 2000">
+          <div class="skill-fill" style="left:0%;width:100%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Qualitative User Research</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Qualitative User Research, active since 2000">
+          <div class="skill-fill" style="left:0%;width:100%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Heuristic Evaluations</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="Heuristic Evaluations, active since 2002">
+          <div class="skill-fill" style="left:7.7%;width:92.3%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">User Segment and Scenario Development</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="User Segment and Scenario Development, active since 2003">
+          <div class="skill-fill" style="left:11.5%;width:88.5%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Use Case Development</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Use Case Development, active since 2003">
+          <div class="skill-fill" style="left:11.5%;width:88.5%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Journey Mapping and Information Architecture</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" aria-label="Journey Mapping and Information Architecture, active since 2005">
+          <div class="skill-fill" style="left:19.2%;width:80.8%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Interaction Design</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Interaction Design, active since 2000">
+          <div class="skill-fill" style="left:0%;width:100%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Wireframing &amp; Interactive Prototyping</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" aria-label="Wireframing and Interactive Prototyping, active since 2001">
+          <div class="skill-fill" style="left:3.8%;width:96.2%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">User Interface Design</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="User Interface Design, active since 2000">
+          <div class="skill-fill" style="left:0%;width:100%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">Usability Testing</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" aria-label="Usability Testing, active since 2001">
+          <div class="skill-fill" style="left:3.8%;width:96.2%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row" role="listitem">
+        <span class="skill-name">User Interface Development</span>
+        <div class="skill-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="User Interface Development, active since 2000">
+          <div class="skill-fill" style="left:0%;width:100%"></div>
+        </div>
+      </div>
+
+    </div><!-- /skills-list -->
+  </div><!-- /section-inner -->
 </section>
 
 </main>
@@ -1667,3 +1848,113 @@ section { width: 100%; }
 <footer class="site-footer" role="contentinfo">
   <p class="footer-copy">&copy; Copyright 2026, Kevin Braun</p>
 </footer>
+
+<script>
+// ===== SCROLL ANIMATIONS: CARDS & GALLERY =====
+(function () {
+  'use strict';
+
+  const fadeObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.card, .gallery-item').forEach(function (el, i) {
+    el.style.transitionDelay = (i % 3) * 0.1 + 's';
+    fadeObserver.observe(el);
+  });
+
+  // ===== SKILL ROW ANIMATIONS =====
+  var skillRows = document.querySelectorAll('.skill-row');
+  var skillObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        skillObserver.unobserve(entry.target);
+        skillRows.forEach(function (row, i) {
+          setTimeout(function () {
+            row.classList.add('visible');
+            var fill = row.querySelector('.skill-fill');
+            if (fill) fill.classList.add('animated');
+          }, i * 55);
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  var skillsList = document.querySelector('.skills-list');
+  if (skillsList) skillObserver.observe(skillsList);
+
+  // ===== TESTIMONIALS CAROUSEL =====
+  var track = document.getElementById('carouselTrack');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var dots = document.querySelectorAll('.carousel-dot');
+
+  if (track && prevBtn && nextBtn) {
+    var current = 0;
+    var cards = track.querySelectorAll('.testimonial-card');
+
+    function visibleCount() {
+      return window.innerWidth <= 1024 ? 1 : 2;
+    }
+
+    function totalPages() {
+      return Math.ceil(cards.length / visibleCount());
+    }
+
+    function updateCarousel() {
+      var gap = parseFloat(getComputedStyle(track).gap) || 24;
+      var containerW = track.parentElement.offsetWidth;
+      track.style.transform = 'translateX(-' + (current * (containerW + gap)) + 'px)';
+
+      // Update card widths based on visible count
+      var vc = visibleCount();
+      cards.forEach(function (card) {
+        card.style.flex = '0 0 calc((100% - ' + ((vc - 1) * gap) + 'px) / ' + vc + ')';
+      });
+
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= totalPages() - 1;
+
+      dots.forEach(function (d, i) {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', String(i === current));
+      });
+    }
+
+    prevBtn.addEventListener('click', function () {
+      if (current > 0) { current--; updateCarousel(); }
+    });
+
+    nextBtn.addEventListener('click', function () {
+      if (current < totalPages() - 1) { current++; updateCarousel(); }
+    });
+
+    // Keyboard navigation for carousel dots
+    dots.forEach(function (dot, i) {
+      dot.setAttribute('tabindex', '0');
+      dot.addEventListener('click', function () { current = i; updateCarousel(); });
+      dot.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { current = i; updateCarousel(); e.preventDefault(); }
+      });
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        current = 0;
+        updateCarousel();
+      }, 150);
+    });
+
+    updateCarousel();
+  }
+}());
+</script>
+</body>
+</html>
